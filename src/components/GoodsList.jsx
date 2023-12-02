@@ -1,23 +1,22 @@
-import { GoodsItem } from './GoodsItem';
+import GoodsItem from './GoodsItem';
 
 function GoodsList(props) {
-  const { products = [], addToBasket = Function.prototype } = props;
+  const { goods = [] } = props;
 
-  if (!products.length) {
+  if (!goods.length) {
     return <h3>Nothing here</h3>;
   }
 
   return (
     <div className='goods'>
-      {products.map(item => (
+      {goods.map(item => (
         <GoodsItem
           key={item.id}
           {...item}
-          addToBasket={addToBasket}
         />
       ))}
     </div>
   );
 }
 
-export { GoodsList };
+export default GoodsList;

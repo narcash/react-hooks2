@@ -23,4 +23,4 @@ function GoodsItem(props) {
   );
 }
 
-export { GoodsItem };
+export default GoodsItem;

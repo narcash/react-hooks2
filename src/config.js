@@ -1,5 +1,6 @@
-const API_URL = fetch('https://dummyjson.com/products/')
-  .then(res => res.json())
-  .then(json => console.log(json));
+const API_KEY = process.env.REACT_APP_API_KEY;
+console.log(process.env);
 
-export { API_URL };
+const API_URL = fetch('https://fortniteapi.io/v1/shop?lang=ru');
+
+export { API_URL, API_KEY };

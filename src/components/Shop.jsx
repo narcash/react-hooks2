@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { API_URL } from '../config';
-import { Preloader } from './Preloader';
-import { GoodsList } from './GoodsList';
-import { Cart } from './Cart';
+import { API_KEY, API_URL } from '../config';
 
-export const Shop = () => {
-  const [products, setGoods] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [order, setOrder] = useState([]);
+import Preloader from './Preloader';
+import GoodsList from './GoodsList';
 
-  const addToBasket = item => {};
+function Shop() {
+  const [goods, setGoods] = useState([]);
+  // const [loading, setLoading] = useState(true);
+
   useEffect(function getGoods() {
-    fetch(API_URL)
+    fetch(API_URL, {
+      headers: {
+        Authorization: API_KEY,
+      },
+    })
       .then(response => response.json())
       .then(data => {
-        data.daily && setGoods(data.daily);
-        setLoading(false);
+        data.featured && setGoods(data.featured);
+        // setLoading(false);
       });
   }, []);
   return (
-    <div className='container content'>
-      <Cart quantity={order.length} />
-      {/* {loading ? <Preloader /> : <GoodsList products={products} />} */}
-    </div>
+    <main className='container content'>{<GoodsList goods={goods} />}</main>
   );
-};
+}
+
+export default Shop;
